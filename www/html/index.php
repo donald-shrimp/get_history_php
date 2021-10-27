@@ -17,11 +17,25 @@ var_dump($contents);
 echo $json;
 
 //DB接続テスト
-$link = PDO('mysql:host=localhost:13306;dbname=', 'root', 'secret');
-if (!$link) {
-    die('接続失敗です。'.mysql_error());
+try{
+    $link = new PDO(
+    'mysql:host=mysql;dbname=history;charset=utf8mb4',
+    'root',
+    'secret'
+    // 例外を投げるオプション。PHP8以降は最初からオンなのでこの設定はいらないらしい
+    // [
+    //   PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+    // ]  
+  );
+  print('<p>接続に成功しました。</p>');
+
+}catch(PDOException $e){
+
+  $error = $e->getMessage();
+  print($error);
 }
 
-print('<p>接続に成功しました。</p>');
+
+
 
 ?>
