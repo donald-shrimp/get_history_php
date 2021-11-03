@@ -16,10 +16,10 @@ $time = "time:".$contents['time']."<br>";
 var_dump($contents);
 echo $json;
 
-//DB接続テスト
+//DB接続テスト 
 try{
     $link = new PDO(
-    'mysql:host=mysql;dbname=history;charset=utf8mb4',
+    'mysql:host=db;dbname=history;charset=utf8mb4',
     'root',
     'secret'
     // 例外を投げるオプション。PHP8以降は最初からオンなのでこの設定はいらないらしい
@@ -29,6 +29,19 @@ try{
   );
   print('<p>接続に成功しました。</p>');
 
+  
+
+  $prepare = $link->prepare('INSERT INTO history VALUES (:uid, :title, :url, :time)');
+  $prepare->bindValue(':uid',$contents['uid']);
+  $prepare->bindValue(':title',$contents['title']);
+  $prepare->bindValue(':url',$contents['url']);
+  $prepare->bindValue(':time',$contents['time']);
+  $prepare->execute();
+
+  $prepare = $link->prepare('SELECT * FROM history');
+  $prepare->execute();
+  $result = $prepare->fetchAll(PDO::FETCH_ASSOC);
+  print_r($result);
 }catch(PDOException $e){
 
   $error = $e->getMessage();
