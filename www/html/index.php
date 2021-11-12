@@ -41,11 +41,12 @@ try{
   }
 
 
-  // データ取得
-  $prepare = $link->prepare('SELECT * FROM history');
-  $prepare->execute();
-  $result = $prepare->fetchAll(PDO::FETCH_ASSOC);
-  print_r($result);
+  // データ取得(鬱陶しいのでコメントアウト)
+  // $prepare = $link->prepare('SELECT * FROM history');
+  // $prepare->execute();
+  // $result = $prepare->fetchAll(PDO::FETCH_ASSOC);
+  // print_r($result);
+  
 }catch(PDOException $e){
 
   $error = $e->getMessage();
