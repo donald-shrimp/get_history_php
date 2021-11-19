@@ -24,7 +24,7 @@ try{
   print('<p>接続に成功しました。</p>');
 
   // データ挿入
-  $today = date("Y-m-d H:i:s");
+  $today = date("Y-m-d");
 
   $sql = 'INSERT INTO history VALUES (:uid, :title, :url, :date)';
   $prepare = $link->prepare($sql);
