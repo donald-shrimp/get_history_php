@@ -39,7 +39,7 @@ try{
   $prepare->bindValue(':uid',$contents['uid'], PDO::PARAM_STR);
   
   //もしタイトルが空,/youtubeなら取得していれる
-  if(strlen($contents['title']) == 0||$contents['title'] == 'YouTube'||preg_match($contents['url'] , '/^https://www.youtube.com/watch?v=')){
+  if(strlen($contents['title']) == 0||$contents['title'] == 'YouTube'||preg_match('/www.youtube.com/',$contents['url'] )){
     $prepare->bindValue(':title',GetTitlefromURL($contents['url']), PDO::PARAM_STR);
   }else{
     $prepare->bindValue(':title',$contents['title'], PDO::PARAM_STR);
