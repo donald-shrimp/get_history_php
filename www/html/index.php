@@ -37,13 +37,14 @@ try{
   $sql = 'INSERT INTO history VALUES (:uid, :title, :url, :date)';
   $prepare = $link->prepare($sql);
   $prepare->bindValue(':uid',$contents['uid'], PDO::PARAM_STR);
+  
   //もしタイトルが空,/youtubeなら取得していれる
-  if(strlen($contents['title']) == 0||$contents['title'] == 'YouTube'){
+  if(strlen($contents['title']) == 0||$contents['title'] == 'YouTube'||preg_match($contents['url'] , '/^https://www.youtube.com/watch?v=')){
     $prepare->bindValue(':title',GetTitlefromURL($contents['url']), PDO::PARAM_STR);
   }else{
     $prepare->bindValue(':title',$contents['title'], PDO::PARAM_STR);
   }
-  
+
   $prepare->bindValue(':url',$contents['url'], PDO::PARAM_STR);
   $prepare->bindValue(':date',$today, PDO::PARAM_STR);
 
@@ -55,11 +56,7 @@ try{
   }
 
 
-  // データ取得(鬱陶しいのでコメントアウト)
-  // $prepare = $link->prepare('SELECT * FROM history');
-  // $prepare->execute();
-  // $result = $prepare->fetchAll(PDO::FETCH_ASSOC);
-  // print_r($result);
+  
   
 }catch(PDOException $e){
 
