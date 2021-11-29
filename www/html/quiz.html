@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>たのしい個人情報クイズ　</title>
+  <link rel="stylesheet" href="quiz.css" type="text/css">
+  <!-- CDN -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
+</head>
+
+<body>
+
+  <div id="wrapper">
+    <div class="quiz">
+      <header>たのしい！個人情報クイズ</header>
+    </div>
+    <form action="index.php" method="post">
+      <div class="quiz">
+        <p>第一問　次のうち、5日以内にアクセスしたサイトは？</p>
+        <label><input type="radio" name="quiz_0" class="choices" value="A">ねこ　<a href="a.com"><i class="fas fa-link"></i></a></label><br>
+        <label><input type="radio" name="quiz_0" class="choices" value="A">いぬ</label><br>
+        <label><input type="radio" name="quiz_0" class="choices" value="A">ねこ</label><br>
+        <label><input type="radio" name="quiz_0" class="choices" value="A">たこ</label><br>
+      </div>
+      <div class="quiz">
+        <p>第二問　次のうち、5日以内にアクセスしたサイトは？</p>
+        <label><input type="radio" name="quiz_1" class="choices" value="A">ねこ</label><br>
+        <label><input type="radio" name="quiz_1" class="choices" value="A">いぬ</label><br>
+        <label><input type="radio" name="quiz_1" class="choices" value="A">ねこ</label><br>
+        <label><input type="radio" name="quiz_1" class="choices" value="A">たこ</label><br>
+      </div>
+      <input type="submit" value="回答する" class="button">
+
+    </form>
+  </div>
+</body>
+
+</html>
