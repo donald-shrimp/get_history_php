@@ -68,6 +68,7 @@
             $other[$rand_num]['uid'] = $answer[$i]['uid'];
             $other[$rand_num]['url'] = $answer[$i]['url'];
             $other[$rand_num]['date'] = $answer[$i]['date'];
+            $other[$rand_num]['id'] = $answer[$i]['id'];
           }
 
           //問題を10問作成
@@ -75,9 +76,9 @@
           for ($i = 0; $i < 10; $i += 1) {
             echo "<div class='quiz'><p>第", $i + 1, "問　次のうち、5日以内にアクセスしたサイトは？</p>";
             for ($j = 0; $j < 4; $j += 1) {
-              echo "<label><input type='radio' name='quiz_", $i, "' class='choices' value='A'>", $other[$i * 4 + $j]['title'], "　<a href='", $other[$i * 4 + $j]['url'], "'><i class='fas fa-link'></i></a></label><br>";
+              echo "<label><input type='radio' name='quiz_",$i, "' class='choices' value='",$other[$i * 4 + $j]['id'],"'>", $other[$i * 4 + $j]['title'], "　<a href='", $other[$i * 4 + $j]['url'], "'><i class='fas fa-link'></i></a></label><br>";
             }
-            echo "</div>";
+            echo "<input type='hidden' name='ans_",$i,"' value='",$answer[$i]['id'],"'></div>";
           }
 
         } catch (PDOException $e) {
