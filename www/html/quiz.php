@@ -11,7 +11,7 @@
     <div class="quiz">
       <header>たのしい！個人情報クイズ</header>
     </div><!-- form一歩手前 -->
-    <form action="index.php" method="post">
+    <form action="result.php" method="post">
 
       <?php
       if (isset($_POST["uid"])) {
