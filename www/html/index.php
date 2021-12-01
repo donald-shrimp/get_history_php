@@ -34,7 +34,7 @@ try{
   // データ挿入
   $today = date("Y-m-d");
 
-  $sql = 'INSERT INTO history VALUES (:uid, :title, :url, :date)';
+  $sql = 'INSERT INTO history VALUES (0,:uid, :title, :url, :date)';
   $prepare = $link->prepare($sql);
   $prepare->bindValue(':uid',$contents['uid'], PDO::PARAM_STR);
   

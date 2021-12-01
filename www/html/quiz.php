@@ -80,20 +80,6 @@
             echo "</div>";
           }
 
-
-          //正解が押されたら配列の正答判定をおん
-
-
-
-          //10問繰り返す
-
-
-
-          //正答率を出す 
-
-
-
-
         } catch (PDOException $e) {
 
           $error = $e->getMessage();
