@@ -48,6 +48,8 @@ try{
   $prepare->bindValue(':url',$contents['url'], PDO::PARAM_STR);
   $prepare->bindValue(':date',$today, PDO::PARAM_STR);
 
+//ここにブラックリストの処理を入れる
+
   if(!($prepare->execute())){
     print("\nデータ登録に失敗\n");
     print_r("\n\nERROR:\n");
