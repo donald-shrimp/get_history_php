@@ -37,7 +37,7 @@ try{
 
     //ここにブラックリストの処理を入れる
     $out_count = 0;
-    $blackurl = $pdo->query('SELECT * FROM black_url');
+    $blackurl = $link->query('SELECT * FROM black_url');
     foreach($blackurl['url'] as &$value){
       if(preg_match('/'.$value.'/',$contents['url'])){
         $out_count += 1;
