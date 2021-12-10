@@ -42,7 +42,7 @@ try{
     $blackurl = $stmt->fetchAll(PDO::FETCH_ASSOC);
     $key = 'url';
     foreach($blackurl as $key => $value){
-      var_dump($blackurl);
+      var_dump($value);
       echo '<br>';
       if(preg_match('/'.$value.'/',$contents['url'])){//ちゃんと正規表現で書かないと怒られるらしい
         $out_count += 1;
