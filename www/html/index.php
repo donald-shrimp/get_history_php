@@ -40,10 +40,10 @@ try{
     $out_count = 0;
     $stmt = $link->query('SELECT * FROM black_url');
     $blackurl = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    var_dump($blackurl);
     $key = 'url';
     foreach($blackurl as $key => $value){
-      echo $value .'<br>';
+      var_dump($value);
+      echo '<br>';
       if(preg_match('/'.$value.'/',$contents['url'])){//ちゃんと正規表現で書かないと怒られるらしい
         $out_count += 1;
       }
