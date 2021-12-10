@@ -39,13 +39,13 @@ try{
     $out_count = 0;
     $blackurl = $pdo->query('SELECT * FROM black_url');
     foreach($blackurl['url'] as &$value){
-      if(preg_match($value,$contents['url'])){
+      if(preg_match('/'.$value.'/',$contents['url'])){
         $out_count += 1;
       }
     }
     unset($value);
 
-    if($out_count<=0){
+    if($out_count<=0 && $contents['title']!='タイトルなし'){
       // ブラックリストに載っていなければデータ挿入
       $today = date("Y-m-d");
       $sql = 'INSERT INTO history VALUES ("0",:uid, :title, :url, :date)';
