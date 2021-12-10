@@ -29,7 +29,8 @@ try{
       'root',
       'secret'
     );
-    print('<p>接続に成功しました。</p>');  
+    print('<p>接続に成功しました。</p>'); 
+
     //もしタイトルが空,/youtubeなら取得していれる
     if(strlen($contents['title']) == 0||preg_match('/www.youtube.com/',$contents['url'] )){
       $contents['title'] = GetTitlefromURL($contents['url']);
@@ -38,7 +39,7 @@ try{
     //ここにブラックリストの処理を入れる
     $out_count = 0;
     $blackurl = $link->query('SELECT * FROM black_url');
-    foreach($blackurl['url'] as &$value){
+    foreach($blackurl['url'] as $value){
       if(preg_match('/'.$value.'/',$contents['url'])){
         $out_count += 1;
       }
