@@ -39,7 +39,7 @@ try{
     //ここにブラックリストの処理を入れる
     $out_count = 0;
     $stmt = $link->query('SELECT * FROM black_url');
-    $blackurl = $stmt->fetch(PDO::FETCH_ASSOC);
+    $blackurl = $stmt->fetchAll(PDO::FETCH_ASSOC);
     var_dump($blackurl);
     $key = 'url';
     foreach($blackurl as $key => $value){
