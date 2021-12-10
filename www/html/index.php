@@ -41,12 +41,12 @@ try{
     //URLBAN(トップページなど・完全一致)
 
     //ドメインBAN(部分一致)
-    $stmt = $link->query('SELECT domain FROM black_url');
+    $stmt = $link->query('SELECT url FROM black_url');
     $blackurl = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    $key = 'domain';
+    $key = 'url';
     foreach($blackurl as $key => $value){
       // echo $value['url'],'これはvalue<br>';
-      if(preg_match('/'.$value['domain'].'/',$contents['url'])){//ちゃんと正規表現で書かないと怒られるらしい
+      if(preg_match('/'.$value['url'].'/',$contents['url'])){//ちゃんと正規表現で書かないと怒られるらしい
         $out_count += 1;
       }
     }
