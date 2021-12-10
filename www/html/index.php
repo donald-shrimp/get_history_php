@@ -29,40 +29,47 @@ try{
       'root',
       'secret'
     );
-  print('<p>接続に成功しました。</p>');
+    print('<p>接続に成功しました。</p>');  
+    //もしタイトルが空,/youtubeなら取得していれる
+    if(strlen($contents['title']) == 0||preg_match('/www.youtube.com/',$contents['url'] )){
+      $contents['title'] = GetTitlefromURL($contents['url']);
+    }
 
-  // データ挿入
-  $today = date("Y-m-d");
+    //ここにブラックリストの処理を入れる
+    $out_count = 0;
+    $blackurl = $pdo->query('SELECT * FROM black_url');
+    foreach($blackurl['url'] as &$value){
+      if(preg_match($value,$contents['url'])){
+        $out_count += 1;
+      }
+    }
+    unset($value);
 
-  $sql = 'INSERT INTO history VALUES ("0",:uid, :title, :url, :date)';
-  $prepare = $link->prepare($sql);
-  $prepare->bindValue(':uid',$contents['uid'], PDO::PARAM_STR);
-  
-  //もしタイトルが空,/youtubeなら取得していれる
-  if(strlen($contents['title']) == 0||preg_match('/www.youtube.com/',$contents['url'] )){
-    $prepare->bindValue(':title',GetTitlefromURL($contents['url']), PDO::PARAM_STR);
-  }else{
-    $prepare->bindValue(':title',$contents['title'], PDO::PARAM_STR);
-  }
-
-  $prepare->bindValue(':url',$contents['url'], PDO::PARAM_STR);
-  $prepare->bindValue(':date',$today, PDO::PARAM_STR);
-
-//ここにブラックリストの処理を入れる
-
-  if(!($prepare->execute())){
-    print("\nデータ登録に失敗\n");
-    print_r("\n\nERROR:\n");
-    print_r($prepare->errorInfo());
-    print("\n");
-  }
+    if($out_count<=0){
+      // ブラックリストに載っていなければデータ挿入
+      $today = date("Y-m-d");
+      $sql = 'INSERT INTO history VALUES ("0",:uid, :title, :url, :date)';
+      $prepare = $link->prepare($sql);
+      $prepare->bindValue(':uid',$contents['uid'], PDO::PARAM_STR);
+      $prepare->bindValue(':title',$contents['title'], PDO::PARAM_STR);
+      $prepare->bindValue(':url',$contents['url'], PDO::PARAM_STR);
+      $prepare->bindValue(':date',$today, PDO::PARAM_STR);
+      
+      //データ送信
+      if(!($prepare->execute())){
+        print("\nデータ登録に失敗\n");
+        print_r("\n\nERROR:\n");
+        print_r($prepare->errorInfo());
+        print("\n");
+      }
+    }
+    
 
 
-  
-  
+    
+    
 }catch(PDOException $e){
 
   $error = $e->getMessage();
   print($error);
 }
-?>
