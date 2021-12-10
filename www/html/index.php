@@ -38,12 +38,15 @@ try{
 
     //ここにブラックリストの処理を入れる
     $out_count = 0;
-    $stmt = $link->query('SELECT url FROM black_url');
+    //URLBAN(トップページなど・完全一致)
+
+    //ドメインBAN(部分一致)
+    $stmt = $link->query('SELECT domain FROM black_url');
     $blackurl = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    $key = 'url';
+    $key = 'domain';
     foreach($blackurl as $key => $value){
       // echo $value['url'],'これはvalue<br>';
-      if(preg_match('/'.$value['url'].'/',$contents['url'])){//ちゃんと正規表現で書かないと怒られるらしい
+      if(preg_match('/'.$value['domain'].'/',$contents['url'])){//ちゃんと正規表現で書かないと怒られるらしい
         $out_count += 1;
       }
     }
