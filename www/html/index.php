@@ -32,7 +32,7 @@ try{
     print('<p>接続に成功しました。</p>'); 
 
     //もしタイトルが空,/youtubeなら取得していれる
-    if(strlen($contents['title']) == 0||preg_match('/www.youtube.com/',$contents['url'] )){
+    if(strlen($contents['title']) == 0||preg_match('/www.youtube.com/',$contents['url'] )||preg_match('/twitter.com/',$contents['url'] )){
       $contents['title'] = GetTitlefromURL($contents['url']);
     }
 
