@@ -41,7 +41,7 @@ try{
     //URLBAN(トップページなど・完全一致)
 
     //ドメインBAN(部分一致)
-    $stmt = $link->query('SELECT url FROM black_url');
+    $stmt = $link->query('SELECT url FROM black_url WHERE url!="null"');
     $blackurl = $stmt->fetchAll(PDO::FETCH_ASSOC);
     $key = 'url';
     foreach($blackurl as $key => $value){
@@ -69,6 +69,7 @@ try{
         print_r($prepare->errorInfo());
         print("\n");
       }
+      print("\nデータ登録に成功\n");
     }
     
 
